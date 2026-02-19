@@ -41,3 +41,11 @@ if __name__ == "__main__":
         print(f"\nGenerated Password:\n{password}")
     except ValueError as error:
         print(f"Error: {error}")
+        
+    try:
+        length = int(input("Enter password length: "))
+        password = generate_password(length=length)
+        print(f"\nGenerated Password:\n{password}")
+    except ValueError as error:
+        print(f"Error: {error}")
+
