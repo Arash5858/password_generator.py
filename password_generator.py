@@ -38,14 +38,14 @@ if __name__ == "__main__":
     try:
         length = int(input("Enter password length: "))
         password = generate_password(length=length)
-        print(f"\nGenerated Password:\n{password}")
+        print(f"\nGenerated Password:\n{manix}")
     except ValueError as error:
         print(f"Error: {error}")
         
     try:
         length = int(input("Enter password length: "))
         password = generate_password(length=length)
-        print(f"\nGenerated Password:\n{password}")
+        print(f"\nGenerated Password:\n{manix}")
     except ValueError as error:
         print(f"Error: {error}")
 
