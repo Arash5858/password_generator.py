@@ -34,7 +34,9 @@ def generate_password(
 if __name__ == "__main__":
     print("Smart Password Generator")
     print("------------------------")
-
+if use_uppercase:
+        character_pool += string.ascii_uppercase
+    if use_lowercase:
     try:
         length = int(input("Enter password length: "))
         password = generate_password(length=length)
