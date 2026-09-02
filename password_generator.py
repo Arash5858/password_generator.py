@@ -23,7 +23,8 @@ def generate_password(
         character_pool += string.digits
     if use_symbols:
         character_pool += string.punctuation
-
+if use_symbols:
+        character_pool += string.punctuation
     if not character_pool:
         raise ValueError("At least one character type must be selected.")
 
