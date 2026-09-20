@@ -1,0 +1,61 @@
+import time
+import requests
+from datetime import datetime
+
+SERVICES = {
+    "API": "https://api.github.com",
+    "Google": "https://www.google.com",
+    "Cloudflare": "https://www.cloudflare.com",
+}
+
+TIMEOUT = 5
+
+
+def check_service(name, url):
+    started = time.perf_counter()
+
+    try:
+        response = requests.get(url, timeout=TIMEOUT)
+        elapsed = round((time.perf_counter() - started) * 1000, 2)
+
+        return {
+            "service": name,
+            "status": response.status_code,
+            "response_time_ms": elapsed,
+            "available": response.ok,
+        }
+
+    except requests.RequestException:
+        elapsed = round((time.perf_counter() - started) * 1000, 2)
+
+        return {
+            "service": name,
+            "status": None,
+            "response_time_ms": elapsed,
+            "available": False,
+        }
+
+
+def run_monitor():
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    print(f"\nVeyro API Monitor")
+    print(f"Checked: {timestamp}")
+    print("-" * 55)
+
+    for name, url in SERVICES.items():
+        result = check_service(name, url)
+
+        state = "UP" if result["available"] else "DOWN"
+        status = result["status"] or "N/A"
+
+        print(
+            f"{name:<15}"
+            f"{state:<8}"
+            f"HTTP {status:<5}"
+            f"{result['response_time_ms']} ms"
+        )
+
+
+if __name__ == "__main__":
+    run_monitor()
